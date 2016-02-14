@@ -8,3 +8,5 @@ TODO
  * [ ] Learn about configuring suricata
  * [ ] Run it and think about benchmarking (load generator?)
  * [ ] Benchmark suricata in VM and docker
+
+Found https://github.com/StamusNetworks/Amsterdam which provides a preconfigured suricata stack.
