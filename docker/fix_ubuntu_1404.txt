@@ -1,0 +1,10 @@
+Symptom:
+when running docker daemon a fatal error occurs:
+FATA[0000] Error starting daemon: Devices cgroup isn't mounted
+
+Fix:
+edit /etc/default/grub and change
+
+GRUB_CMDLINE_LINUX="cgroup_enable=memory swapaccount=1"
+
+then do sudo update-grub
