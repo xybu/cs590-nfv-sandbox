@@ -6,10 +6,11 @@
 HYPERVISOR=kvm
 DISTRO=ubuntu
 SUITE=trusty
+ARCH=amd64
 MEMSIZE=1024 # In MiB.
 NCPU=4
 VMDOMAIN=vmdomain
-VMHOSTNAME=vm
+VMHOSTNAME=ubuntu01
 USERNAME=ubuntu
 PASSWORD=ubuntu
 
@@ -20,10 +21,10 @@ grep -q -e 'ubuntu' $SUDOERS_TMPL || sudo sed -i '$a ubuntu ALL=(ALL) NOPASSWD:A
 
 # flavour : virtual, server, generic
 # --firstboot PATH --firstlogin PATH --copy FILE --exec SCRIPT
-sudo vmbuilder $HYPERVISOR $DISTRO --suite $SUITE --arch amd64 --flavour virtual  \
+sudo vmbuilder $HYPERVISOR $DISTRO --suite $SUITE --arch $ARCH --flavour virtual  \
                --timezone America/Indiana/Indianapolis \
                --ssh-user-key ./config/id_rsa.pub    \
-               --domain $VMDOMAIN --hostname $HOSTNAME --user $USERNAME --pass $PASSWORD \
+               --domain $VMDOMAIN --hostname $VMHOSTNAME --user $USERNAME --pass $PASSWORD \
                --rootsize 20480 --mem $MEMSIZE --cpus $NCPU              \
                --addpkg=linux-image-generic                              \
                --addpkg=openssh-server --addpkg=command-not-found        \
@@ -31,5 +32,5 @@ sudo vmbuilder $HYPERVISOR $DISTRO --suite $SUITE --arch amd64 --flavour virtual
                --addpkg=avahi-daemon \
                --addpkg=acpid --addpkg=vim --debug -v                    \
                --libvirt qemu:///system \
-               --dest ./$DISTRO-$SUITE-amd64/
+               --dest ./$DISTRO-$SUITE-$ARCH/$VMHOSTNAME.qcow2
 
