@@ -16,7 +16,7 @@ PASSWORD=ubuntu
 SUDOERS_TMPL=/etc/vmbuilder/ubuntu/sudoers.tmpl
 grep -q -e 'ubuntu' $SUDOERS_TMPL || sudo sed -i '$a ubuntu ALL=(ALL) NOPASSWD:ALL\n#includedir /etc/sudoers.d' $SUDOERS_TMPL
 
-mkdir -p $DISTRO-$SUITE-amd64
+# mkdir -p $DISTRO-$SUITE-amd64
 
 # flavour : virtual, server, generic
 # --firstboot PATH --firstlogin PATH --copy FILE --exec SCRIPT
