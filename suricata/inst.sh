@@ -19,3 +19,9 @@ cd suricata-3.0
 make
 sudo make install-full
 sudo ldconfig
+
+# Make log dir
+sudo mkdir -p /var/log/suricata
+
+# Get some rule set from Internet.
+sudo wget --no-parent -l1 -r --no-directories -P /etc/suricata/rules/ https://rules.emergingthreats.net/open/suricata/rules/
