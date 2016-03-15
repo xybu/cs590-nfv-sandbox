@@ -1,3 +1,3 @@
 #!/bin/bash
 
-sudo vmbuilder kvm ubuntu -c ubuntu.ini
+sudo vmbuilder kvm ubuntu -c $1

@@ -1,8 +1,8 @@
 
 # Use latest ubuntu LTS
-FROM ubuntu:14.04.4
+FROM ubuntu:latest
 
-ENV VIRTUSER user
+# ENV VIRTUSER user
 # Suricata version.
 ENV VER=3.0
 ENV DEBIAN_FRONTEND=noninteractive
@@ -18,14 +18,14 @@ libjansson-dev pkg-config libgeoip-dev libnetfilter-queue-dev
 RUN apt-get install -yq libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-dev libnfnetlink0
 
 # Install Sucicata.
-USER $VIRTUSER
-WORKDIR /home/$VIRTUSER
+# USER $VIRTUSER
+WORKDIR /tmp
 RUN wget http://www.openinfosecfoundation.org/download/suricata-$VER.tar.gz
 RUN tar -xvzf suricata-$VER.tar.gz
-WORKDIR /home/$VIRTUSER/suricata-$VER
+WORKDIR /tmp/suricata-$VER
 RUN ./configure --enable-nfqueue --enable-geoip --enable-profiling --enable-debug --enable-debug-validation --enable-unittests --prefix=/usr --sysconfdir=/etc --localstatedir=/var
 RUN make
-USER root
+# USER root
 RUN make install-full
 RUN ldconfig
 RUN mkdir -p /var/log/suricata
