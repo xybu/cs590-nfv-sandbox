@@ -8,6 +8,7 @@ sudo apt-get install build-essential libpcap-dev
 # Download tcyreplay
 cd /tmp
 wget https://github.com/appneta/tcpreplay/releases/download/v4.1.1/tcpreplay-4.1.1.tar.gz
+tar xvf tcpreplay-4.1.1.tar.gz
 cd tcpreplay-4.1.1
 
 # Install tcyreplay
