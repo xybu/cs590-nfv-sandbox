@@ -14,6 +14,6 @@ make
 sudo make install
 
 cd /tmp
-wget https://downloads.sourceforge.net/project/pytbull/pytbull-2.0.tar.bz2
-tar xvf pytbull-2.0.tar.bz2
+wget https://downloads.sourceforge.net/project/pytbull/pytbull-2.1.tar.bz2
+tar xvf pytbull-2.1.tar.bz2
 sudo mv pytbull /opt/
