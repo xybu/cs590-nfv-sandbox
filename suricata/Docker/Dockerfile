@@ -23,7 +23,7 @@ WORKDIR /tmp
 RUN wget http://www.openinfosecfoundation.org/download/suricata-$VER.tar.gz
 RUN tar -xvzf suricata-$VER.tar.gz
 WORKDIR /tmp/suricata-$VER
-RUN ./configure --enable-nfqueue --enable-geoip --enable-profiling --enable-debug --enable-debug-validation --enable-unittests --prefix=/usr --sysconfdir=/etc --localstatedir=/var
+RUN ./configure --enable-nfqueue --enable-unittests --enable-profiling --prefix=/usr --sysconfdir=/etc --localstatedir=/var
 RUN make
 # USER root
 RUN make install-full
