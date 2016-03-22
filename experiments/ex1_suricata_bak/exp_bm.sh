@@ -28,6 +28,7 @@ NWORKER=$2
 NREPEAT=$3
 
 # Start sender VM if not started already.
+sudo pkill -15 Suricata-Main 
 virsh start ubuntu1
 
 # Transfer the specified trace file.
@@ -55,9 +56,13 @@ ssh xb@10.0.0.101 $REMOTE_WORKDIR/run_trace.sh $1 $NWORKER $NREPEAT
 echo -e "\033[94mStopping Suricata...\033[0m"
 sleep 5
 sudo kill -15 $suricata_pid
+sleep 1
+sudo pkill -15 Suricata-Main
 
 # Copy some logs back to host. The path must correspond to run_trace.sh.
 rsync -vrpE xb@10.0.0.101:$REMOTE_TCPREPLAY_DIR $(pwd)/$LOG_DIR/
+
+# virsh reboot ubuntu1
 
 # Clean up.
 echo -e "\033[92mDone. Logs saved in \"$LOG_DIR\".\033[0m"

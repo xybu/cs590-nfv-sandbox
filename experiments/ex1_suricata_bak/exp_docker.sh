@@ -71,5 +71,7 @@ docker rm $CONTAINER_NAME
 # Copy some logs back to host. The path must correspond to run_trace.sh.
 rsync -vrpE xb@10.0.0.101:$REMOTE_TCPREPLAY_DIR $(pwd)/$LOG_DIR/
 
+# virsh reboot ubuntu1
+
 # Clean up.
 echo -e "\033[92mDone. Logs saved in \"$LOG_DIR\".\033[0m"

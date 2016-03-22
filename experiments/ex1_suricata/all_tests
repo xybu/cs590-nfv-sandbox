@@ -1,8 +1,0 @@
-bm		smallFlows.pcap	4	4	3
-bm		smallFlows.pcap	8	4	3
-bm		smallFlows.pcap	16	4	3
-bm		smallFlows.pcap	32	4	3
-docker	smallFlows.pcap	4	4	3
-docker	smallFlows.pcap	8	4	3
-docker	smallFlows.pcap	16	4	3
-docker	smallFlows.pcap	32	4	3
