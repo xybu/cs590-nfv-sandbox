@@ -69,40 +69,6 @@ Bare Metal
 
 No limit on memory.
 
-Trace -  snort.log.1425823194
-
-Log - logs.2016-03-18T21:32:38,185710632-0400
-
-```
-xb@ubuntu1:~/traces$ sudo tcpreplay -i eth0 snort.log.1425823194
-Actual: 142202 packets (157287081 bytes) sent in 22.08 seconds.
-Rated: 6891000.0 Bps, 55.12 Mbps, 6230.14 pps
-Flows: 1833 flows, 80.30 fps, 140196 flow packets, 2006 non-flow
-Statistics for network device: eth0
-        Successful packets:        142202
-        Failed packets:            0
-        Truncated packets:         0
-        Retried packets (ENOBUFS): 0
-        Retried packets (EAGAIN):  0
-```
-
-Trace - bigFlows.pcap
-
-Log - logs.2016-03-18T21:35:23,719524404-0400
-
-```
-xb@ubuntu1:~/traces$ sudo tcpreplay -i eth0 bigFlows.pcap
-Actual: 791615 packets (355417784 bytes) sent in 303.06 seconds.
-Rated: 1170400.0 Bps, 9.36 Mbps, 2607.03 pps
-Flows: 40686 flows, 133.99 fps, 791179 flow packets, 436 non-flow
-Statistics for network device: eth0
-        Successful packets:        791615
-        Failed packets:            0
-        Truncated packets:         0
-        Retried packets (ENOBUFS): 0
-        Retried packets (EAGAIN):  0
-```
-
 Docker
 ======
 

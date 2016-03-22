@@ -4,8 +4,8 @@
 # Usage: run.sh TRACEFILE NWORKER NREPEAT
 
 TRACEFILE=$1
-NREPEAT=$2
-NWORKER=$3
+NWORKER=$2
+NREPEAT=$3
 
 rm -rfv /tmp/tcpreplay_out
 mkdir -p /tmp/tcpreplay_out
