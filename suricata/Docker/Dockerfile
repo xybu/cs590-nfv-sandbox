@@ -31,6 +31,10 @@ RUN ldconfig
 RUN mkdir -p /var/log/suricata
 
 # Get some rule set from Internet.
-RUN wget --no-parent -l1 -r --no-directories -P /etc/suricata/rules/ https://rules.emergingthreats.net/open/suricata/rules/
+WORKDIR /tmp
+RUN wget http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
+RUN tar -xvf emerging.rules.tar.gz -C /etc/suricata --overwrite
+
+# RUN wget --no-parent -l1 -r --no-directories -P /etc/suricata/rules/ https://rules.emergingthreats.net/open/suricata/rules/
 
 RUN chmod u+s /usr/bin/suricata
