@@ -24,9 +24,10 @@ sudo ldconfig
 sudo mkdir -p /var/log/suricata
 
 # Get some rule set from Internet.
-cd /tmp
-wget http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
-sudo tar xvf emerging.rules.tar.gz -C /etc/suricata --overwrite
+# cd /tmp
+# wget http://rules.emergingthreats.net/open/suricata/emerging.rules.tar.gz
+# sudo tar xvf emerging.rules.tar.gz
+# sudo cp -vfpr ./rules/* /etc/suricata/rules/
 # sudo wget --no-parent -l1 -r --no-directories -P /etc/suricata/rules/ https://rules.emergingthreats.net/open/suricata/rules/
 
 sudo chmod u+s /usr/bin/suricata

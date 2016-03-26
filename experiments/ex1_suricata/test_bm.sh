@@ -1,9 +1,10 @@
 #!/bin/bash
 
-LOG_DIR="bm.logs.$(date +%Y%m%d.%H%M%S)"
 TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
+
+LOG_DIR="logs,bm,$TRACEFILE,$(date +%Y%m%d.%H%M%S)"
 
 source ./test_frame.sh
 
@@ -15,7 +16,7 @@ function pre_clean() {
 
 function start_test() {
 	log "\033[94mStarting Suricata...\033[0m"
-	sudo suricata -l $(pwd)/$LOG_DIR -i em2 &> $(pwd)/$LOG_DIR/suricata.out &
+	sudo suricata -c /etc/suricata/suricata.yaml -l $(pwd)/$LOG_DIR -i em2 &> $(pwd)/$LOG_DIR/suricata.out &
 	suricata_pid=$!
 
 	# Wait until Suricata initializes.

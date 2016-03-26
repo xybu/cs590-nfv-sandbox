@@ -1,24 +1,30 @@
 @stop-vm
 
-@start-vm
+# @start-vm
 
 # bm smallFlows1.pcap 8 2 1
 
-bm snort.log.1425823194 8 2 1
+# bm bigFlows.pcap 8 2 1
+
+# vm bigFlows.pcap 8 2 1
+
+#bm snort.log.1425823194 8 2 1
 
 # docker smallFlows1.pcap 8 2 1
 
-docker snort.log.1425823194 8 2 1
+# docker snort.log.1425823194 8 2 1
 
 # vm smallFlows1.pcap 8 2 1
 
-vm snort.log.1425823194 8 2 1
+# vm snort.log.1425823194 8 2 1
+
+# @stop-vm
+
+bm can-2003-0003.pcap 2 1 1
+docker can-2003-0003.pcap 2 1 1
+vm can-2003-0003.pcap 2 1 1
 
 @stop-vm
-
-# bm can-2003-0003.pcap 2 1 1
-#docker can-2003-0003.pcap 2 1 1
-#vm can-2003-0003.pcap 2 1 1
 
 #bm smallFlows1.pcap 4 3 2
 # bm smallFlows1.pcap 8 3 2

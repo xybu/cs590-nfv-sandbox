@@ -1,9 +1,10 @@
 #!/bin/bash
 
-LOG_DIR="docker.logs.$(date +%Y%m%d.%H%M%S)"
 TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
+
+LOG_DIR="logs,dk,$TRACEFILE,$(date +%Y%m%d.%H%M%S)"
 
 CONTAINER_NAME="suricata"
 

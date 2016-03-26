@@ -2,7 +2,7 @@
 
 REMOTE_HOST="cap07"
 REMOTE_USER="bu1"
-REMOTE_TRACELOG='/tmp/tracerunner'
+REMOTE_TRACELOG='/tmp/tcpreplay.result'
 
 function log() {
   echo -e "\033[96m[$(date '+%Y-%m-%d %H:%M:%S.%N')]\033[0m $1"
