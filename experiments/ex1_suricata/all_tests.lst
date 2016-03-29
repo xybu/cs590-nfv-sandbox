@@ -1,43 +1,35 @@
 @stop-vm
 
-# @start-vm
+# ARGUMENTS:
+# ENGINE TRACE NWORKER NREPEAT NROUNDS
 
-# bm smallFlows1.pcap 8 2 1
+bm smallFlows.pcap 4 3 3
+bm smallFlows.pcap 8 3 3
+bm smallFlows.pcap 16 3 3
+bm smallFlows.pcap 32 3 3
+bm bigFlows.pcap 8 3 3
+bm bigFlows.pcap 16 3 3
+bm bigFlows.pcap 24 3 3
+bm bigFlows.pcap 32 3 3
 
-# bm bigFlows.pcap 8 2 1
+docker smallFlows.pcap 4 3 3
+docker smallFlows.pcap 8 3 3
+docker smallFlows.pcap 16 3 3
+docker smallFlows.pcap 32 3 3
+docker bigFlows.pcap 8 3 3
+docker bigFlows.pcap 16 3 3
+docker bigFlows.pcap 24 3 3
+docker bigFlows.pcap 32 3 3
 
-# vm bigFlows.pcap 8 2 1
+@start-vm
 
-#bm snort.log.1425823194 8 2 1
-
-# docker smallFlows1.pcap 8 2 1
-
-# docker snort.log.1425823194 8 2 1
-
-# vm smallFlows1.pcap 8 2 1
-
-# vm snort.log.1425823194 8 2 1
-
-# @stop-vm
-
-bm can-2003-0003.pcap 2 1 1
-docker can-2003-0003.pcap 2 1 1
-vm can-2003-0003.pcap 2 1 1
+vm smallFlows.pcap 4 3 3
+vm smallFlows.pcap 8 3 3
+vm smallFlows.pcap 16 3 3
+vm smallFlows.pcap 32 3 3
+vm bigFlows.pcap 8 3 3
+vm bigFlows.pcap 16 3 3
+vm bigFlows.pcap 24 3 3
+vm bigFlows.pcap 32 3 3
 
 @stop-vm
-
-#bm smallFlows1.pcap 4 3 2
-# bm smallFlows1.pcap 8 3 2
-# bm smallFlows1.pcap 16 3 2
-# bm smallFlows1.pcap 32 3 2
-# bm smallFlows1.pcap 64 3 2
-
-#docker smallFlows1.pcap 4 3 2
-# docker smallFlows1.pcap 8 3 2
-# docker smallFlows1.pcap 16 3 2
-# docker smallFlows1.pcap 32 3 2
-# docker smallFlows1.pcap 64 3 2
-
-# @start-vm
-#vm smallFlows1.pcap 4 3 2
-# @stop-vm

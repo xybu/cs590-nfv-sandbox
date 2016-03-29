@@ -4,7 +4,7 @@ TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
 
-LOG_DIR="logs,vm,$TRACEFILE,$(date +%Y%m%d.%H%M%S)"
+LOG_DIR="logs,vm,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
 
 VM_NAME="suricata-vm"
 VM_IPADDR="192.168.1.2"

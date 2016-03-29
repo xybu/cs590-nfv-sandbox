@@ -4,7 +4,7 @@ TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
 
-LOG_DIR="logs,dk,$TRACEFILE,$(date +%Y%m%d.%H%M%S)"
+LOG_DIR="logs,dk,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
 
 CONTAINER_NAME="suricata"
 

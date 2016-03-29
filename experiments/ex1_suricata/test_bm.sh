@@ -4,7 +4,7 @@ TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
 
-LOG_DIR="logs,bm,$TRACEFILE,$(date +%Y%m%d.%H%M%S)"
+LOG_DIR="logs,bm,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
 
 source ./test_frame.sh
 
