@@ -3,33 +3,37 @@
 # ARGUMENTS:
 # ENGINE TRACE NWORKER NREPEAT NROUNDS
 
-bm smallFlows.pcap 4 3 3
-bm smallFlows.pcap 8 3 3
-bm smallFlows.pcap 16 3 3
-bm smallFlows.pcap 32 3 3
-bm bigFlows.pcap 8 3 3
-bm bigFlows.pcap 16 3 3
-bm bigFlows.pcap 24 3 3
-bm bigFlows.pcap 32 3 3
+# bm smallFlows.pcap 4 3 3
+# bm smallFlows.pcap 8 3 3
+# bm smallFlows.pcap 16 3 3
+# bm smallFlows.pcap 32 3 3
+# bm bigFlows.pcap 8 3 3
+# bm bigFlows.pcap 16 3 3
+# bm bigFlows.pcap 24 3 3
+# bm bigFlows.pcap 32 3 3# 
 
-docker smallFlows.pcap 4 3 3
-docker smallFlows.pcap 8 3 3
-docker smallFlows.pcap 16 3 3
-docker smallFlows.pcap 32 3 3
-docker bigFlows.pcap 8 3 3
-docker bigFlows.pcap 16 3 3
-docker bigFlows.pcap 24 3 3
-docker bigFlows.pcap 32 3 3
+# docker smallFlows.pcap 4 3 3
+# docker smallFlows.pcap 8 3 3
+# docker smallFlows.pcap 16 3 3
+# docker smallFlows.pcap 32 3 3
+# docker bigFlows.pcap 8 3 3
+# docker bigFlows.pcap 16 3 3
+# docker bigFlows.pcap 24 3 3
+# docker bigFlows.pcap 32 3 3
 
 @start-vm
 
-vm smallFlows.pcap 4 3 3
-vm smallFlows.pcap 8 3 3
-vm smallFlows.pcap 16 3 3
-vm smallFlows.pcap 32 3 3
-vm bigFlows.pcap 8 3 3
-vm bigFlows.pcap 16 3 3
-vm bigFlows.pcap 24 3 3
-vm bigFlows.pcap 32 3 3
+# vm smallFlows.pcap 4 3 3
+# vm smallFlows.pcap 8 3 3
+# vm smallFlows.pcap 16 3 3
+# vm smallFlows.pcap 32 3 3
+# vm bigFlows.pcap 8 3 3
+# vm bigFlows.pcap 16 3 3
+# vm bigFlows.pcap 24 3 3
+# vm bigFlows.pcap 32 3 3
+
+vm bigFlows.pcap 1 3 3
+vm bigFlows.pcap 2 3 3
+vm bigFlows.pcap 4 3 3
 
 @stop-vm

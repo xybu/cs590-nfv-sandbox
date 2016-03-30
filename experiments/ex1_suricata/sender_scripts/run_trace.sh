@@ -28,7 +28,7 @@ function create_single_worker() {
 }
 
 # Use atop to gather NIC throughput info.
-atop -PNET 5 &> atop.raw &
+sudo atop -PNET 5 &> atop.raw &
 atop_pid=$!
 
 # Create tcpreplay workers.
