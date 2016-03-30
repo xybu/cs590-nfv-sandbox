@@ -10,7 +10,7 @@ TRACE_REPO_NAME="traces"
 
 LOCAL_TRACE_PARENT="/scratch/bu1"
 
-if [ -d $LOCAL_TRACE_REPO ] ; then
+if [ -d "$LOCAL_TRACE_PARENT/$TRACE_REPO_NAME" ] ; then
 	echo -e "\033[94mPolling most recent changes...\033[0m"
 	hg pull --cwd=$LOCAL_TRACE_PARENT/$TRACE_REPO_NAME
 	hg update --cwd=$LOCAL_TRACE_PARENT/$TRACE_REPO_NAME
