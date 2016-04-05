@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage:
-#   test_docker.sh bigFlows.pcap 16 3 em2[+vtap] [stat 4]
+#   test_docker.sh bigFlows.pcap 16 3 [--nic=em2] [--use-vtap] [--cpus=0-3] [--memory=2g] [--swappiness=10]
 
 source ./config/config.$(hostname).ini
 source ./framework.sh
@@ -9,45 +9,56 @@ source ./framework.sh
 TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
-CONTAINER_NAME="suricata"
 
-# Parse NIC argument, which is either "em2" or "em2+vtap".
-TEST_NIC=$4
-echo $TEST_NIC | grep -aob + &> /dev/null
-if [ "$?" -eq "0" ] ; then
-	# '+' is in NIC name. Create vtap.
-	USE_VTAP=true
-	TEST_NIC=$(echo $TEST_NIC | cut -d+ -f1)
-	setup_nic $TEST_NIC
-	# Fix macvtap device's name to macvtap0.
+CONTAINER_NAME="suricata"
+TEST_NIC="em2"
+USE_VTAP=false
+ENABLE_STAT=false
+CPUSET="0-3"
+MEMORY_LIMIT="2g"
+MEMORY_SWAPPINESS="5"
+
+for i in ${@:4} ; do
+	case $i in
+		-n=*|--nic=*)
+			TEST_NIC="${i#*=}"
+			shift
+			;;
+		-c=*|--cpus=*)
+			CPUSET="${i#*=}"
+			shift
+			;;
+		-m=*|--memory=*)
+			MEMORY_LIMIT="${i#*=}"
+			shift
+			;;
+		--use-vtap)
+			USE_VTAP=true
+			;;
+		--swappiness=*)
+			MEMORY_SWAPPINESS="${i#*=}"
+			shift
+			;;
+		--stat=*)
+			ENABLE_STAT=true
+			STAT_INTERVAL="${i#*=}"
+			shift
+			;;
+		*)
+			echo -e "\033[91mError: unknown argument $i\033[0m"
+			;;
+	esac
+done
+
+# Configure NIC and VTAP.
+setup_nic $TEST_NIC
+if [ $USE_VTAP ] ; then
 	del_macvtap macvtap0
 	add_macvtap $TEST_NIC macvtap0
 	TEST_NIC="macvtap0"
-	# for i in 0 1 2 .. 20 ; do
-	#	ifconfig macvtap$i &> /dev/null
-	#	if [ $? -ne "0" ] ; then
-	#		add_macvtap $TEST_NIC macvtap$i
-	#		TEST_NIC=macvtap$i
-	#		break
-	#	fi
-	# done
-	# Hopefully there is a free name in macvtap0 -- macvtap20.
-else
-	USE_VTAP=false
-	setup_nic $TEST_NIC
 fi
 
-case $5 in
-	on|true|stat)
-		ENABLE_STAT=true
-		STAT_INTERVAL=$6
-		;;
-	*)
-		ENABLE_STAT=false
-		;;
-esac
-
-LOG_DIR="$(pwd)/logs,dk,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
+LOG_DIR="$(pwd)/logs,dk,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$CPUSET,$MEMORY_LIMIT,$MEMORY_SWAPPINESS,$ENABLE_STAT"
 
 function pre_clean() {
 	log "Pre cleaning..."
@@ -64,7 +75,9 @@ function start_test() {
 		top_pid=$!
 	fi
 	log "Starting Suricata in Docker..."
-	docker run -i --name $CONTAINER_NAME --net=host -v $LOG_DIR:/var/log/suricata xybu:suricata \
+	docker run -i --name $CONTAINER_NAME \
+		--cpuset-cpus=$CPUSET --memory=$MEMORY_LIMIT --memory-swappiness=$MEMORY_SWAPPINESS \
+		--net=host -v $LOG_DIR:/var/log/suricata xybu:suricata \
 		suricata -i $TEST_NIC &> $LOG_DIR/suricata.out &
 	wait_suricata
 }
@@ -80,7 +93,10 @@ function post_clean() {
 		sudo kill -15 $top_pid
 	fi
 	wait
-	del_macvtap macvtap0
+	# Remove VTAP device.
+	if [ $USE_VTAP ] ; then
+		del_macvtap $TEST_NIC
+	fi
 }
 
 pre_clean

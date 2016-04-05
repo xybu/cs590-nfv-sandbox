@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage:
-#   test_bm.sh bigFlows.pcap 16 3 em2 [stat 4]
+#   test_bm.sh bigFlows.pcap 16 3 [--nic=em2] [--use-vtap] [--stat=4]
 
 source ./config/config.$(hostname).ini
 source ./framework.sh
@@ -9,22 +9,42 @@ source ./framework.sh
 TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
-TEST_NIC=$4
 
-case $5 in
-	on|true|stat)
-		ENABLE_STAT=true
-		STAT_INTERVAL=$6
-		;;
-	*)
-		ENABLE_STAT=false
-		;;
-esac
+TEST_NIC="em2"
+USE_VTAP=false
+ENABLE_STAT=false
 
-LOG_DIR="$(pwd)/logs,bm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
+for i in ${@:4} ; do
+	case $i in
+		-n=*|--nic=*)
+			TEST_NIC="${i#*=}"
+			shift
+			;;
+		--use-vtap)
+			USE_VTAP=true
+			;;
+		--stat=*)
+			ENABLE_STAT=true
+			STAT_INTERVAL="${i#*=}"
+			shift
+			;;
+		*)
+			echo -e "\033[91mError: unknown argument $i\033[0m"
+			;;
+	esac
+done
+
+# Configure NIC and VTAP.
+setup_nic $TEST_NIC
+if [ $USE_VTAP ] ; then
+	del_macvtap macvtap0
+	add_macvtap $TEST_NIC macvtap0
+	TEST_NIC="macvtap0"
+fi
+
+LOG_DIR="$(pwd)/logs,bm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$ENABLE_STAT"
 
 function pre_clean() {
-	setup_nic $TEST_NIC
 	$ENABLE_STAT && sudo pkill -15 top
 	$ENABLE_STAT && sudo pkill -15 atop
 	sudo pkill -15 Suricata-Main
@@ -55,6 +75,10 @@ function post_clean() {
 		sudo kill -15 $top_pid
 	fi
 	wait
+	# Remove VTAP device.
+	if [ $USE_VTAP ] ; then
+		del_macvtap $TEST_NIC
+	fi
 }
 
 pre_clean

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage:
-#   test_vm.sh bigFlows.pcap 16 3 [stat 4]
+#   test_vm.sh bigFlows.pcap 16 3 [--nic=em2] [--stat=4] [--vm-name=suricata-vm] [--vm-ipaddr=192.168.1.2]
 #
 # Notes:
 #   To change the NIC to monitor, edit the VM config in virsh or virt-manager.
@@ -12,19 +12,45 @@ source ./framework.sh
 TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
+
+VM_NAME="suricata-vm"
+VM_IPADDR="192.168.1.2"
 TEST_NIC="em2"
+ENABLE_STAT=false
 
-case $4 in
-	on|true|stat)
-		ENABLE_STAT=true
-		STAT_INTERVAL=$5
-		;;
-	*)
-		ENABLE_STAT=false
-		;;
-esac
+# Need to configure VM to change the following parameters:
+#  CPUSET, MEMORY, SWAPPINESS, NIC.
+#  Use macvtap of passthru mode to share host NIC device.
+#  The script assumes the VM_* fields to be the same for all VMs.
 
-LOG_DIR="logs,vm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
+for i in ${@:4} ; do
+	case $i in
+		-n=*|--nic=*)
+			TEST_NIC="${i#*=}"
+			shift
+			;;
+		--vm-name=*)
+			VM_NAME="${i#*=}"
+			shift
+			;;
+		--vm-ipaddr=*)
+			VM_IPADDR="${i#*=}"
+			shift
+			;;
+		--stat=*)
+			ENABLE_STAT=true
+			STAT_INTERVAL="${i#*=}"
+			shift
+			;;
+		*)
+			echo -e "\033[91mError: unknown argument $i\033[0m"
+			;;
+	esac
+done
+
+LOG_DIR="$(pwd)/logs,vm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$VM_NAME"
+
+setup_nic $TEST_NIC
 
 function shutdown_vm() {
 	virsh shutdown $VM_NAME
@@ -92,10 +118,10 @@ function post_clean() {
 	log "Stopping Suricata..."
   	ssh root@$VM_IPADDR pkill -15 Suricata-Main
   	if [ $ENABLE_STAT ] ; then
-		log "Stopping top and atop..."
-		ssh root@$VM_IPADDR pkill -15 atop
-		ssh root@$VM_IPADDR pkill -15 top
-	fi
+			log "Stopping top and atop..."
+			ssh root@$VM_IPADDR pkill -15 atop
+			ssh root@$VM_IPADDR pkill -15 top
+		fi
 	wait
 	log "Suricata exit."
 	rsync -rvpE "root@$VM_IPADDR:$VM_LOG_DIR/*" $LOG_DIR/
