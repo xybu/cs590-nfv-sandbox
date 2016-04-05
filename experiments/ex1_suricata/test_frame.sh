@@ -1,6 +1,6 @@
 #!/bin/bash
 
-REMOTE_HOST="cap07"
+REMOTE_HOST="cap09"
 REMOTE_USER="bu1"
 REMOTE_TRACELOG='/tmp/tcpreplay.result'
 

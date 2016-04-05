@@ -1,0 +1,6 @@
+# Test list for cap03.
+
+3 bm     bigFlows.pcap 2 1 em2      stat 4
+3 docker bigFlows.pcap 2 1 em2      stat 4
+3 docker bigFlows.pcap 2 1 em2+vtap stat 4
+# 3 vm     bigFlows.pcap 2 1          stat 4

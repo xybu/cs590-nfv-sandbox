@@ -4,7 +4,7 @@ TRACEFILE=$1
 NWORKER=$2
 NREPEAT=$3
 
-LOG_DIR="logs,dk,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
+LOG_DIR="logs,dkm,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S)"
 
 CONTAINER_NAME="suricata"
 
@@ -20,7 +20,7 @@ function pre_clean() {
 
 function start_test() {
 	log "\033[94mStarting Suricata in Docker...\033[0m"
-	docker run -i --name $CONTAINER_NAME --net=host -v $(pwd)/$LOG_DIR:/var/log/suricata xybu:suricata suricata -i em2 &> $(pwd)/$LOG_DIR/suricata.out &
+	docker run -i --name $CONTAINER_NAME --net=host -v $(pwd)/$LOG_DIR:/var/log/suricata xybu:suricata suricata -i macvtap0 &> $(pwd)/$LOG_DIR/suricata.out &
 
 	# Wait until Suricata initializes.
 	while [ ! -f $(pwd)/$LOG_DIR/eve.json ] ; do

@@ -6,14 +6,14 @@ import sys
 import time
 
 
-LOCAL_NIC = 'em2'
+LOCAL_NIC = 'macvtap0'
 
 VM_NAME = 'suricata-vm'
 VM_IPADDR = '192.168.1.2'
 VM_USER = 'root'
 VM_NIC = 'eth0'
 
-REMOTE_HOST = 'cap07'
+REMOTE_HOST = 'cap09'
 REMOTE_USER = 'bu1'
 
 
@@ -88,11 +88,13 @@ def do_tests(filename='all_tests.lst'):
 def cleanup():
 	print('\n' + Colors.RED + now() + 'Interrupted. Cleaning up.' + Colors.ENDC)
 	subprocess.call(['ssh', '%s@%s' % (REMOTE_USER, REMOTE_HOST), 'sudo', 'pkill', '-9', 'tcpreplay'])
+	subprocess.call(['ssh', '%s@%s' % (REMOTE_USER, REMOTE_HOST), 'sudo', 'pkill', '-9', 'atop'])
 
 
 def main():
 	try:
 		prepare_sender()
+		prepare_nic(prepend_cmd=['sudo'], nic='em2')
 		prepare_nic(prepend_cmd=['sudo'], nic=LOCAL_NIC)
 		do_tests()
 	except KeyboardInterrupt:
