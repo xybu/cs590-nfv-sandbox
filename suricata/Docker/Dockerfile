@@ -1,10 +1,9 @@
-
 # Use latest ubuntu LTS
 FROM ubuntu:latest
 
 # ENV VIRTUSER user
 # Suricata version.
-ENV VER=3.0
+ENV VER=3.0.1
 ENV DEBIAN_FRONTEND=noninteractive
 
 # Install dependencies.

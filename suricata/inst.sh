@@ -13,7 +13,7 @@ sudo apt-get -y install libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-
 cd /tmp
 wget http://downloads.suricata-ids.org/suricata-current.tar.gz
 tar xvf suricata-current.tar.gz
-cd suricata-3.0
+cd suricata-3.0.1
 
 ./configure --enable-nfqueue --enable-unittests --enable-profiling --prefix=/usr --sysconfdir=/etc --localstatedir=/var
 make

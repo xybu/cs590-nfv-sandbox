@@ -3,10 +3,10 @@ TODO
 
 ## Feb 13, 2016
 
- * [ ] Create docker image for suricata
- * [ ] Create VM for suricata
+ * [X] Create docker image for suricata
+ * [X] Create VM for suricata
  * [ ] Learn about configuring suricata
- * [ ] Run it and think about benchmarking (load generator?)
- * [ ] Benchmark suricata in VM and docker
+ * [X] Run it and think about benchmarking (load generator?)
+ * [X] Benchmark suricata in VM and docker
 
 Found https://github.com/StamusNetworks/Amsterdam which provides a preconfigured suricata stack.
