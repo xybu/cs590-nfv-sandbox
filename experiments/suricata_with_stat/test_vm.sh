@@ -80,7 +80,7 @@ for i in ${@:4} ; do
 	esac
 done
 
-LOG_DIR="$(pwd)/logs,vm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$VM_NAME"
+LOG_DIR="$(pwd)/logs,vm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$VM_NAME,$VCPUCOUNT,$CPUSET,$MEMORY_LIMIT,$MEMORY_SWAPPINESS,$ENABLE_STAT"
 
 setup_nic $TEST_NIC
 
