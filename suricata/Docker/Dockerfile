@@ -9,12 +9,13 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies.
 # https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Ubuntu_Installation
 RUN apt-get update -qq
-RUN apt-get install -yq python-software-properties software-properties-common wget
+RUN apt-get upgrade -q
+RUN apt-get install -yq wget
 RUN apt-get install -yq libpcre3 libpcre3-dbg libpcre3-dev \
-build-essential autoconf automake libtool libpcap-dev libnet1-dev \
+build-essential make autoconf automake libtool libpcap-dev libnet1-dev \
 libyaml-0-2 libyaml-dev zlib1g zlib1g-dev libmagic-dev libcap-ng-dev \
-libjansson-dev pkg-config libgeoip-dev libnetfilter-queue-dev
-RUN apt-get install -yq libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-dev libnfnetlink0
+libjansson-dev pkg-config libgeoip-dev libnetfilter-queue-dev \
+libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-dev libnfnetlink0
 
 # Install Sucicata.
 # USER $VIRTUSER

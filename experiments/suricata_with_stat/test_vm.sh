@@ -14,14 +14,17 @@ NWORKER=$2
 NREPEAT=$3
 
 VM_NAME="suricata-vm"
-VM_IPADDR="192.168.1.2"
+VM_IPADDR="192.168.122.2"
 TEST_NIC="em2"
 ENABLE_STAT=false
 
-# Need to configure VM to change the following parameters:
-#  CPUSET, MEMORY, SWAPPINESS, NIC.
-#  Use macvtap of passthru mode to share host NIC device.
-#  The script assumes the VM_* fields to be the same for all VMs.
+CPUSET="0-3"
+VCPUCOUNT="4"
+MEMORY_LIMIT="2g"
+MEMORY_SWAPPINESS="5"
+
+# Still need to configure the NICs of the VM manually.
+# The script assumes the VM_* fields in config to be the same for all VMs.
 
 for i in ${@:4} ; do
 	case $i in
@@ -35,6 +38,35 @@ for i in ${@:4} ; do
 			;;
 		--vm-ipaddr=*)
 			VM_IPADDR="${i#*=}"
+			shift
+			;;
+		--vcpus=*)
+			VCPUCOUNT="${i#*=}"
+			shift
+			;;
+		-c=*|--cpus=*)
+			CPUSET="${i#*=}"
+			shift
+			;;
+		-m=*|--memory=*)
+			MEMORY_LIMIT="${i#*=}"
+			if [[ "$MEMORY_LIMIT" == *g ]] ; then
+				MEMORY_LIMIT=${MEMORY_LIMIT%?}
+				MEMORY_LIMIT=$((MEMORY_LIMIT * 2**20)) # in KiB.
+			else 
+				if [[ "$MEMORY_LIMIT" == *m ]] ; then
+					MEMORY_LIMIT=${MEMORY_LIMIT%?}
+					MEMORY_LIMIT=$((MEMORY_LIMIT * 2**10))
+				else
+					if [[ "$MEMORY_LIMIT" == *k ]] ; then
+						MEMORY_LIMIT=${MEMORY_LIMIT%?}
+					fi
+				fi
+			fi
+			shift
+			;;
+		--swappiness=*)
+			MEMORY_SWAPPINESS="${i#*=}"
 			shift
 			;;
 		--stat=*)
@@ -62,6 +94,15 @@ function shutdown_vm() {
 
 function boot_vm() {
 	log "Starting VM $VM_NAME..."
+
+	# Configure CPU and RAM of VM at runtime.
+	virsh emulatorpin $VM_NAME $CPUSET --config
+	virsh setvcpus $VM_NAME $VCPUCOUNT --config
+	for (( i=0 ; i<=$VCPUCOUNT ; ++i )) ; do
+		virsh vcpupin $VM_NAME --vcpu $i $CPUSET --config
+	done
+	virsh setmem $VM_NAME $MEMORY_LIMIT --config
+
 	virsh start $VM_NAME
 
 	# Wait for VM to start.
@@ -71,6 +112,7 @@ function boot_vm() {
 		sleep 5
 		ssh root@$VM_IPADDR echo "Virtual machine $VM_NAME is ready."
 	done
+	ssh root@$VM_IPADDR sysctl -w vm.swappiness=$MEMORY_SWAPPINESS
 }
 
 function pre_clean() {
@@ -81,9 +123,11 @@ function pre_clean() {
 	log "Cleaning up any residual data in the VM."
 	ssh root@$VM_IPADDR pkill -15 Suricata-Main
 	ssh root@$VM_IPADDR rm -rfv "$VM_LOG_DIR/*"
-	if [ $ENABLE_STAT ] ; then
+	if $ENABLE_STAT ; then
 		ssh root@$VM_IPADDR pkill -15 top
 		ssh root@$VM_IPADDR pkill -15 atop
+		pkill -15 top
+		pkill -15 atop
 	fi
 
 	rsync -vpE ./framework.sh root@$VM_IPADDR:$VM_SCRIPT_DIR/
@@ -97,12 +141,14 @@ EOF
 }
 
 function start_test() {
-	if [ $ENABLE_STAT ] ; then
+	if $ENABLE_STAT ; then
 		log "Starting top and atop in VM..."
 		# Use network to transfer the log gradually because the VM disk may not
 		# be large enough to hold the files.
-		ssh root@$VM_IPADDR atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop.out &
-		ssh root@$VM_IPADDR top -b -d $STAT_INTERVAL &> $LOG_DIR/top.out &
+		ssh root@$VM_IPADDR atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop_vm.out &
+		ssh root@$VM_IPADDR top -b -d $STAT_INTERVAL &> $LOG_DIR/top_vm.out &
+		atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop_host.out &
+		top -b -d $STAT_INTERVAL &> $LOG_DIR/top_host.out &
 	fi
 	log "Starting Suricata in VM..."
 	ssh root@$VM_IPADDR suricata -i $VM_NIC &> $LOG_DIR/suricata.out &
@@ -117,16 +163,19 @@ function post_clean() {
 	sleep 10
 	log "Stopping Suricata..."
   	ssh root@$VM_IPADDR pkill -15 Suricata-Main
-  	if [ $ENABLE_STAT ] ; then
-			log "Stopping top and atop..."
-			ssh root@$VM_IPADDR pkill -15 atop
-			ssh root@$VM_IPADDR pkill -15 top
-		fi
+  	if $ENABLE_STAT ; then
+		log "Stopping top and atop..."
+		ssh root@$VM_IPADDR pkill -15 atop
+		ssh root@$VM_IPADDR pkill -15 top
+		pkill -15 atop
+		pkill -15 top
+	fi
 	wait
 	log "Suricata exit."
 	rsync -rvpE "root@$VM_IPADDR:$VM_LOG_DIR/*" $LOG_DIR/
 	ssh root@$VM_IPADDR rm -rfv "$VM_LOG_DIR/*"
 	ssh root@$VM_IPADDR sync
+	virsh cpu-stats $VM_NAME > $LOG_DIR/virsh_cpu_stat.txt
 	shutdown_vm
 }
 

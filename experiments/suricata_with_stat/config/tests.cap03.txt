@@ -1,0 +1,16 @@
+# Test list for cap03.
+
+2 bm     bigFlows.pcap 1 1 --nic=em2      		--stat=4
+2 docker bigFlows.pcap 1 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 docker bigFlows.pcap 1 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 vm     bigFlows.pcap 1 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+2 bm     bigFlows.pcap 2 1 --nic=em2      		--stat=4
+2 docker bigFlows.pcap 2 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 docker bigFlows.pcap 2 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 vm     bigFlows.pcap 2 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+2 bm     bigFlows.pcap 4 1 --nic=em2      		--stat=4
+2 docker bigFlows.pcap 4 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 docker bigFlows.pcap 4 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+2 vm     bigFlows.pcap 4 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4

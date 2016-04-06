@@ -43,9 +43,9 @@ def prepare_sender(host, user, remote_script_dir):
 def handle_test(line):
 	nround, engine, args = line.split(maxsplit=2)
 	nround = int(nround)
+	args = args.split()
 	for i in range(0, nround):
-		args = args.split()
-		print(Colors.MAGENTA + now() + 'Experiment {%s %s} - Round %d / %d' % (engine, ' '.join(args), i, nround) + Colors.ENDC)
+		print(Colors.MAGENTA + now() + 'Experiment {%s %s} - Round %d / %d' % (engine, ' '.join(args), i+1, nround) + Colors.ENDC)
 		subprocess.call(['./test_%s.sh' % engine] + args)
 
 

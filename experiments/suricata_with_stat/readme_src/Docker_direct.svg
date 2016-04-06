@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/PR-SVG-20010719/DTD/svg10.dtd">
+<svg width="41cm" height="15cm" viewBox="103 -86 817 291" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <g>
+    <rect style="fill: #ffffff" x="595.025" y="-84.1717" width="323.75" height="242.133"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="595.025" y="-84.1717" width="323.75" height="242.133"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="756.9" y="-60.5217">
+      <tspan x="756.9" y="-60.5217"></tspan>
+      <tspan x="756.9" y="-43.5884"></tspan>
+      <tspan x="756.9" y="-26.6551"></tspan>
+      <tspan x="756.9" y="-9.72172"></tspan>
+      <tspan x="756.9" y="7.21161"></tspan>
+      <tspan x="756.9" y="24.1449"></tspan>
+      <tspan x="756.9" y="41.0783"></tspan>
+      <tspan x="756.9" y="58.0116"></tspan>
+      <tspan x="756.9" y="74.9449"></tspan>
+      <tspan x="756.9" y="91.8783"></tspan>
+      <tspan x="756.9" y="108.812"></tspan>
+      <tspan x="756.9" y="125.745"></tspan>
+      <tspan x="756.9" y="142.678">Traffic-gen host (Ubuntu Server 14.04.4 x64)</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="691.9" y="-18.8507" width="194" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="691.9" y="-18.8507" width="194" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="788.9" y="4.79928">
+      <tspan x="788.9" y="4.79928">TCPreplay Process 1</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="692.1" y="30.4493" width="194" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="692.1" y="30.4493" width="194" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="789.1" y="54.0993">
+      <tspan x="789.1" y="54.0993">TCPreplay Process 2</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="692.1" y="79.4493" width="194" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="692.1" y="79.4493" width="194" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="789.1" y="103.099">
+      <tspan x="789.1" y="103.099">TCPreplay Process N</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="563.9" y="10.1493" width="83" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="563.9" y="10.1493" width="83" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="605.4" y="33.7993">
+      <tspan x="605.4" y="33.7993">em2</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="563.1" y="66.4493" width="83" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="563.1" y="66.4493" width="83" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="604.6" y="90.0993">
+      <tspan x="604.6" y="90.0993">em1</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="691.9" y1="0.615945" x2="655.85" y2="16.0506"/>
+    <polygon style="fill: #000000" points="648.956,19.0025 656.18,10.4702 655.85,16.0506 660.116,19.663 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="648.956,19.0025 656.18,10.4702 655.85,16.0506 660.116,19.663 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="692.1" y1="49.9159" x2="655.781" y2="33.6047"/>
+    <polygon style="fill: #000000" points="648.94,30.532 660.11,30.0679 655.781,33.6047 656.014,39.1901 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="648.94,30.532 660.11,30.0679 655.781,33.6047 656.014,39.1901 "/>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="692.1" y1="98.9159" x2="652.785" y2="47.1052"/>
+    <polygon style="fill: #000000" points="648.252,41.1306 658.28,46.0743 652.785,47.1052 650.313,52.1192 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="648.252,41.1306 658.28,46.0743 652.785,47.1052 650.313,52.1192 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="104.1" y="-84.6" width="304" height="242.133"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="104.1" y="-84.6" width="304" height="242.133"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="256.1" y="-60.95">
+      <tspan x="256.1" y="-60.95"></tspan>
+      <tspan x="256.1" y="-44.0167"></tspan>
+      <tspan x="256.1" y="-27.0833"></tspan>
+      <tspan x="256.1" y="-10.15"></tspan>
+      <tspan x="256.1" y="6.78333"></tspan>
+      <tspan x="256.1" y="23.7167"></tspan>
+      <tspan x="256.1" y="40.65"></tspan>
+      <tspan x="256.1" y="57.5833"></tspan>
+      <tspan x="256.1" y="74.5167"></tspan>
+      <tspan x="256.1" y="91.45"></tspan>
+      <tspan x="256.1" y="108.383"></tspan>
+      <tspan x="256.1" y="125.317"></tspan>
+      <tspan x="256.1" y="142.25">Suricata host (Ubuntu Server 14.04.4 x64)</tspan>
+    </text>
+  </g>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="449.1" y1="29.9159" x2="563.9" y2="29.6159"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="428.35" y1="104.383" x2="427.9" y2="167.616"/>
+  <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="583.85" y1="105.383" x2="583.9" y2="168.616"/>
+  <g>
+    <rect style="fill: #ffffff" x="186.9" y="86.6159" width="144.1" height="39"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="186.9" y="86.6159" width="144.1" height="39"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="258.95" y="110.299">
+      <tspan x="258.95" y="110.299">Test control process</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="722.9" y="-66.8507" width="132" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="722.9" y="-66.8507" width="132" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="788.9" y="-43.2007">
+      <tspan x="788.9" y="-43.2007">atop</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="128.9" y="-23" width="250.1" height="100"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="128.9" y="-23" width="250.1" height="100"/>
+    <text font-size="14.1111" style="fill: #0000ff;text-anchor:middle;font-family:CMU Serif;font-style:oblique;font-weight:normal" x="253.95" y="4.82222">
+      <tspan x="253.95" y="4.82222">Docker</tspan>
+      <tspan x="253.95" y="22.4611"></tspan>
+      <tspan x="253.95" y="40.1"></tspan>
+      <tspan x="253.95" y="57.7389"></tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="174.1" y="-71.5507" width="167" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="174.1" y="-71.5507" width="167" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="257.6" y="-47.9007">
+      <tspan x="257.6" y="-47.9007">atop, top</tspan>
+    </text>
+  </g>
+  <text font-size="12.8" style="fill: #000000;text-anchor:start;font-family:CMU Serif;font-style:normal;font-weight:normal" x="467.9" y="24.6159">
+    <tspan x="467.9" y="24.6159">1Gbps Link</tspan>
+  </text>
+  <g>
+    <rect style="fill: #ffffff" x="182" y="19.1806" width="144" height="39.6389"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="182" y="19.1806" width="144" height="39.6389"/>
+    <text font-size="14.1111" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:700" x="254" y="43.3806">
+      <tspan x="254" y="43.3806">Suricata</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="366.1" y="10.4493" width="83" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="366.1" y="10.4493" width="83" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="407.6" y="34.0993">
+      <tspan x="407.6" y="34.0993">em2</tspan>
+    </text>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="366.1" y="65.4493" width="83" height="38.9333"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="366.1" y="65.4493" width="83" height="38.9333"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="407.6" y="89.0993">
+      <tspan x="407.6" y="89.0993">em1</tspan>
+    </text>
+  </g>
+  <g>
+    <line style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x1="366.1" y1="29.9159" x2="335.495" y2="36.8489"/>
+    <polygon style="fill: #000000" points="328.181,38.506 336.829,31.4202 335.495,36.8489 339.038,41.173 "/>
+    <polygon style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" points="328.181,38.506 336.829,31.4202 335.495,36.8489 339.038,41.173 "/>
+  </g>
+  <g>
+    <rect style="fill: #ffffff" x="421.4" y="161.8" width="168" height="42"/>
+    <rect style="fill: none; fill-opacity:0; stroke-width: 2; stroke: #000000" x="421.4" y="161.8" width="168" height="42"/>
+    <text font-size="13.5467" style="fill: #000000;text-anchor:middle;font-family:CMU Serif;font-style:normal;font-weight:normal" x="505.4" y="186.983">
+      <tspan x="505.4" y="186.983">External network</tspan>
+    </text>
+  </g>
+</svg>

@@ -3,12 +3,12 @@
 # According to
 # https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Ubuntu_Installation
 
-sudo apt-get -y install libpcre3 libpcre3-dbg libpcre3-dev \
-build-essential autoconf automake libtool libpcap-dev libnet1-dev \
-libyaml-0-2 libyaml-dev zlib1g zlib1g-dev libcap-ng-dev libcap-ng0 \
-make libmagic-dev libjansson-dev libjansson4
-
-sudo apt-get -y install libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-dev libnfnetlink0
+sudo apt-get install -yq wget
+sudo apt-get install -yq libpcre3 libpcre3-dbg libpcre3-dev \
+build-essential make autoconf automake libtool libpcap-dev libnet1-dev \
+libyaml-0-2 libyaml-dev zlib1g zlib1g-dev libmagic-dev libcap-ng-dev \
+libjansson-dev pkg-config libgeoip-dev libnetfilter-queue-dev \
+libnetfilter-queue-dev libnetfilter-queue1 libnfnetlink-dev libnfnetlink0
 
 cd /tmp
 wget http://downloads.suricata-ids.org/suricata-current.tar.gz
