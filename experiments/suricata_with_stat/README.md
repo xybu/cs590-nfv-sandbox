@@ -43,11 +43,14 @@ Unless otherwise noted, Suricata uses default configuration generated when insta
 
 Suricata 3.0.1, released on April 4, 2016, [fixed many memory leak bugs and improved stability](http://suricata-ids.org/news/). This can be confirmed by our previous testing of 3.0 version inside VM setup, which resulted in thrashing and can barely be tested.
 
-#### Virtual Machine
+#### Trace files
 
-The virtual machine hardware is configurable. When running tests, different CPU and RAM configuration may be passed as parameters of the test script. By default, it is configured to have access to all 4 cores of the host CPU and have 2 GB of RAM. The XML configurations are available in `config/`. Two NICs are created -- one as macvtap of em2 (NIC for receiving test traffic) with source mode "passthrough", one as a bridge network for remote access to the VM.
+We use the following flows available from the Internet:
 
-The virtual disk has size of 60 GiB, large enough to hold logs of GB magnitude.
+ * [Sample flows provided by TCPreplay](http://tcpreplay.appneta.com/wiki/captures.html) -- `bigFlows.pcap` (359,457 KB), `smallFlows.pcap` (9,224 KB).
+ * [Sample traces collected by WireShark](https://wiki.wireshark.org/SampleCaptures)
+ * [Publicly available PCAP files](http://www.netresec.com/?page=PcapFiles)
+ * [ISTS'12 trace files](http://www.netresec.com/?page=ISTS) -- randomly picked `snort.log.1425823194` (155,823 KB).
 
 #### Topology Setup
 
@@ -55,17 +58,31 @@ The virtual disk has size of 60 GiB, large enough to hold logs of GB magnitude.
 
 In bare metal setting, Suricata will run directly on top of hardware and inspect the NIC interface that the test traffic enters.
 
+![Bare metal setup](https://rawgithub.com/xybu/cs590-nfv-sandbox/master/experiments/suricata_with_stat/readme_src/bare_metal.svg)
+
 ##### Docker Setup
 
 In Docker setting, the container is configured so that the network interfaces of the host is exposed to the container, enabling Suricata to inspect the same NIC interface as in bare metal setting.
+
+The CPU and RAM limitations can be passed as parameters of the test script. By default, it allows the container to access all 4 cores and has a RAM limit of 2GB.
+
+![Docker setup](https://rawgithub.com/xybu/cs590-nfv-sandbox/master/experiments/suricata_with_stat/readme_src/Docker_direct.svg)
 
 ##### Docker-vtap Setup
 
 In Docker-vtap setting, we create a macvtap of mode "passthrough" to copy the traffic arriving at host's em2, and let Suricata in Docker inspect the traffic on the macvtap device.
 
+The CPU and RAM limitations can be passed as parameters of the test script. By default, it allows the container to access all 4 cores and has a RAM limit of 2GB.
+
+![Docker-vtap setup](https://rawgithub.com/xybu/cs590-nfv-sandbox/master/experiments/suricata_with_stat/readme_src/Docker_vtap.svg)
+
 ##### VM Setup
- 
- In virtual machine setting, we create a macvtap of mode "passthrough" to copy the traffic arriving at host's em2 to VM's eth0. 
+
+The virtual machine hardware is configurable. Different CPU and RAM configuration may be passed as parameters of the test script. By default, it is configured to have 4 vCPUs each of which has access to all 4 cores of the host CPU. Capacities of vCPU is copied from host CPU ("host-passthrough"). RAM is set to 2 GB by default. The XML configurations are available in [`config/`](config/). In terms of NIC, We create a macvtap device (macvtap0) of mode "passthrough" to copy the test traffic arriving at host's em2 to VM's eth0. Another NIC, eth1, is added for communications between test control process and the VM.
+
+The virtual disk has size of 60 GiB, large enough to hold logs of GB magnitude.
+
+![VM setup](https://rawgithub.com/xybu/cs590-nfv-sandbox/master/experiments/suricata_with_stat/readme_src/vm.svg)
 
 ### Special Notes
 
@@ -74,5 +91,30 @@ In Docker-vtap setting, we create a macvtap of mode "passthrough" to copy the tr
 
  * Use SSH authorized_keys to facilitate SSH login.
 
-## Experiments
+## Results
 
+### Bare Metal, bigFlows.pcap, 1xTCPreplay
+
+
+
+### Bare Metal, bigFlows.pcap, 2xTCPreplay
+
+### Bare Metal, bigFlows.pcap, 4xTCPreplay
+
+### Docker, bigFlows.pcap, 1xTCPreplay
+
+### Docker, bigFlows.pcap, 2xTCPreplay
+
+### Docker, bigFlows.pcap, 4xTCPreplay
+
+### Docker-vtap, bigFlows.pcap, 1xTCPreplay
+
+### Docker-vtap, bigFlows.pcap, 2xTCPreplay
+
+### Docker-vtap, bigFlows.pcap, 4xTCPreplay
+
+### VM, bigFlows.pcap, 1xTCPreplay
+
+### VM, bigFlows.pcap, 2xTCPreplay
+
+### VM, bigFlows.pcap, 4xTCPreplay
