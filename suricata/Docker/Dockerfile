@@ -9,7 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 # Install dependencies.
 # https://redmine.openinfosecfoundation.org/projects/suricata/wiki/Ubuntu_Installation
 RUN apt-get update -qq
-RUN apt-get upgrade -q
+RUN apt-get upgrade -yq
 RUN apt-get install -yq wget
 RUN apt-get install -yq libpcre3 libpcre3-dbg libpcre3-dev \
 build-essential make autoconf automake libtool libpcap-dev libnet1-dev \
