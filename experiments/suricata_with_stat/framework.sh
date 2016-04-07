@@ -68,4 +68,26 @@ function run_trace() {
 # Required variables: $LOG_DIR.
 function post_copy() {
 	rsync -vrpE $SENDER_USER@$SENDER_HOST:$SENDER_TRACELOG $LOG_DIR/
+	./parse_eve.py $LOG_DIR
+}
+
+# Copy lines of each category to separate files.
+# $1 is the file name (w/o extname) of atop output.
+# Also format the output as csv (without header).
+function postprocess_atop() {
+	for keyword in "cpu" "mem" "cpl" "pag" "dsk" "net" ; do
+		grep -i $keyword $LOG_DIR/$1.out | tr -s '[:blank:]' ',' > $LOG_DIR/$1.$keyword.csv
+	done
+	rm -fv $LOG_DIR/$1.out
+}
+
+# Pick out in file $1.out only lines containing $2 (keyword).
+# Also format the output as csv with header.
+function postprocess_top() {
+	grep -m 1 "COMMAND" $LOG_DIR/$1.out | sed -e 's/^[ \t]*//' | tr -s '[:blank:]' ',' > $LOG_DIR/$1.$2.csv
+	grep -i $2 $LOG_DIR/$1.out | sed -e 's/^[ \t]*//' | tr -s '[:blank:]' ',' >> $LOG_DIR/$1.$2.csv
+}
+
+function test_complete() {
+	sync
 }

@@ -68,7 +68,7 @@ function start_test() {
 }
 
 function post_clean() {
-	sleep 10
+	sleep 20
 	log "Stopping Suricata..."
 	sudo pkill -15 Suricata-Main
 	if $ENABLE_STAT ; then
@@ -81,6 +81,7 @@ function post_clean() {
 	if $USE_VTAP ; then
 		del_macvtap $TEST_NIC
 	fi
+	grep Suricata $LOG_DIR/top.out > $LOG_DIR/top.suricata.txt
 }
 
 pre_clean
@@ -88,3 +89,6 @@ start_test
 run_trace $TRACEFILE $NWORKER $NREPEAT
 post_clean
 post_copy
+postprocess_atop atop
+postprocess_top top suricata
+test_complete

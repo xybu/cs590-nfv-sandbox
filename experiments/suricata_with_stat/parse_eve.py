@@ -8,6 +8,8 @@ Convert Suricata's eve.json to csv format, prepending execution instance number.
 
 import csv
 import json
+import os
+import sys
 
 last_uptime = -1
 last_instance = []
@@ -27,9 +29,12 @@ def flatten_dict(y):
     flatten(y)
     return out
 
+WORKDIR=sys.argv[1]
+if not os.path.isfile(WORKDIR + '/eve.json'):
+	print('Did not find file "%s"' % (WORKDIR + '/eve.json'))
 
 # Assuming each line is a single event.
-with open('eve.json', 'r') as f:
+with open(WORKDIR + '/eve.json', 'r') as f:
 	for line in f:
 		ev = json.loads(line)
 		if ev['event_type'] == 'stats':
@@ -44,7 +49,7 @@ with open('eve.json', 'r') as f:
 if last_instance not in instances:
 	instances.append(last_instance)
 
-with open('eve.csv', 'w') as csvf:
+with open(WORKDIR + '/eve.csv', 'w', newline='') as csvf:
 	fieldnames = sorted(instances[-1][-1].keys())
 	fieldnames.remove('timestamp')
 	fieldnames.remove('uptime')

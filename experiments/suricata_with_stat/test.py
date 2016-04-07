@@ -47,6 +47,8 @@ def handle_test(line):
 	for i in range(0, nround):
 		print(Colors.MAGENTA + now() + 'Experiment {%s %s} - Round %d / %d' % (engine, ' '.join(args), i+1, nround) + Colors.ENDC)
 		subprocess.call(['./test_%s.sh' % engine] + args)
+		print(Colors.MAGENTA + now() + 'Wait for 30sec before proceeding.' + Colors.ENDC)
+		time.sleep(30)
 
 
 def do_tests(filename):

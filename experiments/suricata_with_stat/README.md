@@ -2,7 +2,7 @@
 
 ## Intro
 
-We want to compare performance of [Suricata](http://suricata-ids.org/) in bare metal, Docker container, and virtual machine environments, and in different resource allocation configurations.
+We want to compare performance of [Suricata](http://suricata-ids.org/) in bare metal, Docker container, and virtual machine environments, and in different load levels and resource allocation configurations.
 
 ### Method
 

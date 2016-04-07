@@ -85,7 +85,7 @@ function start_test() {
 }
 
 function post_clean() {
-	sleep 10
+	sleep 20
 	log "Stopping Docker container..."
 	docker stop $CONTAINER_NAME
 	docker rm $CONTAINER_NAME
@@ -106,3 +106,7 @@ start_test
 run_trace $TRACEFILE $NWORKER $NREPEAT
 post_clean
 post_copy
+postprocess_atop atop
+postprocess_top top suricata
+postprocess_top top docker
+test_complete

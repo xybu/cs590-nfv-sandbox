@@ -28,7 +28,7 @@ function create_single_worker() {
 }
 
 # Use atop to gather NIC throughput info.
-sudo atop -PNET 5 &> atop.raw &
+sudo atop -PNET 5 &> atop.out &
 atop_pid=$!
 
 # Create tcpreplay workers.
@@ -54,4 +54,4 @@ sudo pkill -15 atop
 wait $atop_pid
 
 # Process atop data.
-cat atop.raw | grep $NIC > atop.$NIC.rows
+grep $NIC atop.out | tr -s '[:blank:]' ',' > atop.$NIC.csv

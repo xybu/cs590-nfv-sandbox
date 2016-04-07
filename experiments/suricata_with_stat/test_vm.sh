@@ -98,7 +98,7 @@ function boot_vm() {
 	# Configure CPU and RAM of VM at runtime.
 	virsh emulatorpin $VM_NAME $CPUSET --config
 	virsh setvcpus $VM_NAME $VCPUCOUNT --config
-	for (( i=0 ; i<=$VCPUCOUNT ; ++i )) ; do
+	for (( i=0 ; i<$VCPUCOUNT ; ++i )) ; do
 		virsh vcpupin $VM_NAME --vcpu $i $CPUSET --config
 	done
 	virsh setmem $VM_NAME $MEMORY_LIMIT --config
@@ -126,8 +126,8 @@ function pre_clean() {
 	if $ENABLE_STAT ; then
 		ssh root@$VM_IPADDR pkill -15 top
 		ssh root@$VM_IPADDR pkill -15 atop
-		pkill -15 top
-		pkill -15 atop
+		sudo pkill -15 top
+		sudo pkill -15 atop
 	fi
 
 	rsync -vpE ./framework.sh root@$VM_IPADDR:$VM_SCRIPT_DIR/
@@ -147,8 +147,8 @@ function start_test() {
 		# be large enough to hold the files.
 		ssh root@$VM_IPADDR atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop_vm.out &
 		ssh root@$VM_IPADDR top -b -d $STAT_INTERVAL &> $LOG_DIR/top_vm.out &
-		atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop_host.out &
-		top -b -d $STAT_INTERVAL &> $LOG_DIR/top_host.out &
+		sudo atop -PCPU,cpu,CPL,MEM,PAG,DSK,NET $STAT_INTERVAL &> $LOG_DIR/atop.out &
+		sudo top -b -d $STAT_INTERVAL &> $LOG_DIR/top.out &
 	fi
 	log "Starting Suricata in VM..."
 	ssh root@$VM_IPADDR suricata -i $VM_NIC &> $LOG_DIR/suricata.out &
@@ -160,15 +160,16 @@ EOF
 }
 
 function post_clean() {
-	sleep 10
+	sleep 20
 	log "Stopping Suricata..."
   	ssh root@$VM_IPADDR pkill -15 Suricata-Main
   	if $ENABLE_STAT ; then
-		log "Stopping top and atop..."
+		log "Stopping top and atop in VM..."
 		ssh root@$VM_IPADDR pkill -15 atop
 		ssh root@$VM_IPADDR pkill -15 top
-		pkill -15 atop
-		pkill -15 top
+		log "Stopping top and atop in host..."
+		sudo pkill -15 atop
+		sudo pkill -15 top
 	fi
 	wait
 	log "Suricata exit."
@@ -184,3 +185,8 @@ start_test
 run_trace $TRACEFILE $NWORKER $NREPEAT
 post_clean
 post_copy
+postprocess_atop atop
+postprocess_atop atop_vm
+postprocess_top top qemu
+postprocess_top top_vm suricata
+test_complete
