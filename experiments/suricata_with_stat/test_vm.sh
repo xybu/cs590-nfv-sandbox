@@ -141,7 +141,7 @@ function pre_clean() {
 	fi
 
 	rsync -vpE ./framework.sh root@$VM_IPADDR:$VM_SCRIPT_DIR/
-	ssh -t root@$VM_IPADDR /bin/bash -s << EOF
+	ssh -T root@$VM_IPADDR /bin/bash -s << EOF
 		source $VM_SCRIPT_DIR/framework.sh
 		setup_nic $VM_NIC
 EOF
@@ -162,7 +162,7 @@ function start_test() {
 	fi
 	log "Starting Suricata in VM..."
 	ssh root@$VM_IPADDR suricata -i $VM_NIC &> $LOG_DIR/suricata.out &
-	ssh -t root@$VM_IPADDR /bin/bash -s << EOF
+	ssh -T root@$VM_IPADDR /bin/bash -s << EOF
 		source $VM_SCRIPT_DIR/framework.sh
 		LOG_DIR=$VM_LOG_DIR
 		wait_suricata
