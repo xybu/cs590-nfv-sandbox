@@ -78,7 +78,6 @@ function postprocess_atop() {
 	for keyword in "cpu" "mem" "cpl" "pag" "dsk" "net" ; do
 		grep -i $keyword $LOG_DIR/$1.out | tr -s '[:blank:]' ',' > $LOG_DIR/$1.$keyword.csv
 	done
-	rm -fv $LOG_DIR/$1.out
 }
 
 # Pick out in file $1.out only lines containing $2 (keyword).
