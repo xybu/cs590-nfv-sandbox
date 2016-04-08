@@ -14,7 +14,7 @@ NWORKER=$2
 NREPEAT=$3
 
 VM_NAME="suricata-vm"
-VM_IPADDR="192.168.122.2"
+# VM_IPADDR="192.168.122.2"
 TEST_NIC="em2"
 ENABLE_STAT=false
 
@@ -104,6 +104,16 @@ function boot_vm() {
 	virsh setmem $VM_NAME $MEMORY_LIMIT --config
 
 	virsh start $VM_NAME
+
+	# Assuming the VM uses DHCP, obtain IP address from DHCP lease list.
+	if [ -z "$VM_IPADDR" ] ; then
+		log "Wait for 10 sec before probing VM IP address..."
+		sleep 10
+		VM_IPADDR=$(cat /var/lib/libvirt/dnsmasq/default.leases | grep $VM_NAME)
+		# "1460082086 52:54:00:79:ac:0b 192.168.122.227 suricata-vm *""
+		VM_IPADDR=$(echo $VM_IPADDR | cut -d ' ' -f3)
+		log "Found IP address of VM $VM_NAME from DHCP: $VM_IPADDR."
+	fi
 
 	# Wait for VM to start.
 	ssh root@$VM_IPADDR echo "Virtual machine $VM_NAME is ready."

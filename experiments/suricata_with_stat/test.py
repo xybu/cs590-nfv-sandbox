@@ -59,6 +59,7 @@ def do_tests(filename):
 				continue
 			else:
 				handle_test(line)
+	print(Colors.GREEN + now() + 'All tests are done.' + Colors.ENDC)
 
 
 def stop_sender(host, user):

@@ -1,6 +1,6 @@
 <network>
   <name>default</name>
-  <uuid>9666164e-3dc6-479b-a775-03c9dbd844da</uuid>
+  <uuid>be39bf06-dff9-463b-a21c-fa5b37cebe39</uuid>
   <forward mode='nat'>
     <nat>
       <port start='1024' end='65535'/>
@@ -13,3 +13,4 @@
     </dhcp>
   </ip>
 </network>
+

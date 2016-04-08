@@ -89,5 +89,8 @@ function postprocess_top() {
 }
 
 function test_complete() {
+  # Upload the result to another server.
+  log "Uploading log $LOG_DIR..."
+  rsync -zrvpE $LOG_DIR $RESULT_VAULT_USER@$RESULT_VAULT_HOST:$RESULT_VAULT_DIR/
 	sync
 }
