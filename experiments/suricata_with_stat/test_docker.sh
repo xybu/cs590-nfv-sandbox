@@ -65,6 +65,9 @@ LOG_DIR="$(pwd)/logs,dk,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H
 function pre_clean() {
 	log "Pre cleaning..."
 	docker rm -f $CONTAINER_NAME
+	$ENABLE_STAT && sudo pkill -9 top
+	$ENABLE_STAT && sudo pkill -9 atop
+	sudo pkill -9 Suricata-Main
 	mkdir -p $LOG_DIR
 }
 

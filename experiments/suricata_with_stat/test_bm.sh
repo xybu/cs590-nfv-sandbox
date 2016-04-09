@@ -47,9 +47,9 @@ fi
 LOG_DIR="$(pwd)/logs,bm,$TEST_NIC,$TRACEFILE,$NWORKER,$NREPEAT,$(date +%Y%m%d.%H%M%S),$ENABLE_STAT"
 
 function pre_clean() {
-	$ENABLE_STAT && sudo pkill -15 top
-	$ENABLE_STAT && sudo pkill -15 atop
-	sudo pkill -15 Suricata-Main
+	$ENABLE_STAT && sudo pkill -9 top
+	$ENABLE_STAT && sudo pkill -9 atop
+	sudo pkill -9 Suricata-Main
 	mkdir -p $LOG_DIR
 }
 

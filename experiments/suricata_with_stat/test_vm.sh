@@ -126,20 +126,21 @@ function boot_vm() {
 }
 
 function pre_clean() {
+	$ENABLE_STAT && sudo pkill -9 top
+	$ENABLE_STAT && sudo pkill -9 atop
+	sudo pkill -9 Suricata-Main
+
 	shutdown_vm
 	boot_vm
 
 	# Clean up the VM.
 	log "Cleaning up any residual data in the VM."
-	ssh root@$VM_IPADDR pkill -15 Suricata-Main
+	# ssh root@$VM_IPADDR pkill -15 Suricata-Main
 	ssh root@$VM_IPADDR rm -rfv "$VM_LOG_DIR/*"
-	if $ENABLE_STAT ; then
-		ssh root@$VM_IPADDR pkill -15 top
-		ssh root@$VM_IPADDR pkill -15 atop
-		sudo pkill -15 top
-		sudo pkill -15 atop
-	fi
-
+	# if $ENABLE_STAT ; then
+	#	ssh root@$VM_IPADDR pkill -15 top
+	#	ssh root@$VM_IPADDR pkill -15 atop
+	#fi
 	rsync -vpE ./framework.sh root@$VM_IPADDR:$VM_SCRIPT_DIR/
 	ssh -T root@$VM_IPADDR /bin/bash -s << EOF
 		source $VM_SCRIPT_DIR/framework.sh
