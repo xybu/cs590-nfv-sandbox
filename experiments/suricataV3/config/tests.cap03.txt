@@ -1,0 +1,52 @@
+# Test list for cap03.
+
+# 1 bm     can-2003-0003.pcap 1 1 --nic=em2      		--stat=4
+# 1 docker can-2003-0003.pcap 1 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+# 1 docker can-2003-0003.pcap 1 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+# 1 vm     can-2003-0003.pcap 1 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 1 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 1 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 1 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 1 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 2 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 2 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 2 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 2 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 4 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 4 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 4 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 4 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 8 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 8 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 8 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 8 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+# Repeat.
+
+5 bm     bigFlows.pcap 1 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 1 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 1 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 1 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 2 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 2 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 2 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 2 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 4 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 4 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 4 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 4 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+5 bm     bigFlows.pcap 8 1 --nic=em2      		--stat=4
+5 docker bigFlows.pcap 8 1 --nic=em2      		--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 docker bigFlows.pcap 8 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=2g --swappiness=5 --cpus=0-3
+5 vm     bigFlows.pcap 8 1          			--stat=4 --memory=2g --swappiness=5 --cpus=0-3 --vcpus=4
+
+# 10 docker bigFlows.pcap 4 1 --nic=em2      		--stat=4 --memory=1g --swappiness=5 --cpus=0-3
+# 10 docker bigFlows.pcap 4 1 --nic=em2 --vtap=macvtap0 	--stat=4 --memory=1g --swappiness=5 --cpus=0-3
+# 10 vm     bigFlows.pcap 4 1          			--stat=4 --memory=1g --swappiness=5 --cpus=0-3 --vcpus=4

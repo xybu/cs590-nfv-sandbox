@@ -3,12 +3,7 @@
 # Run this script on sender host to pull the latest traces.
 # @author	Xiangyu Bu <bu1@purdue.edu>
 
-TRACE_HOST_ADDR="cap08"
-TRACE_HOST_USER="bu1"
-TRACE_REPO_PARENT="/scratch/bu1"
-TRACE_REPO_NAME="traces"
-
-LOCAL_TRACE_PARENT="/scratch/bu1"
+source ../config/config.$(hostname).ini
 
 if [ -d "$LOCAL_TRACE_PARENT/$TRACE_REPO_NAME" ] ; then
 	echo -e "\033[94mPolling most recent changes...\033[0m"
