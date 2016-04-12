@@ -1,5 +1,5 @@
 # Use latest ubuntu LTS
-FROM ubuntu:latest
+FROM ubuntu:wily
 
 # ENV VIRTUSER user
 # Suricata version.

@@ -31,11 +31,12 @@ class TestSuricataVm(TestSuricataBase):
 		while True:
 			log('Wait for 10sec to probe VM IP address from DHCP...')
 			time.sleep(10)
-			with self.shell.open('/var/lib/libvirt/dnsmasq/default.leases', 'r') as f:
-				for line in f:
-					if line.contains(vm_name):
-						# "1460082086 52:54:00:79:ac:0b 192.168.122.227 suricata-vm *"
-						return vm_ip = line.split()[2]
+			ret = self.shell.run(['virsh', 'net-dhcp-leases', 'default'],
+				encoding='utf-8', allow_error=True)
+			for line in ret.output:
+				if line.contains(vm_name):
+					# "2016-04-12 01:13:28  52:54:00:fb:44:5b  ipv4      192.168.122.204/24        suricata-vm     -"
+					return line.strip().split()[4].split('/')[0]
 
 	def reboot_vm(self):
 		# Shutdown VM if running.
